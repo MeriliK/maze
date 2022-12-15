@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+.textbox {
+    margin:4px, 4px;
+    padding:4px;
+    width: 250px;
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
+
+body {background: #333;}
+.log-boolean,
+.log-undefined {color: magenta;}
+.log-object,
+.log-string {color: orange;}
+.log-number {color: cyan;}
+
+.container{
+    opacity: 0;
+    animation: fade 5s linear;
+}
+
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+
+}
+
+.path {
+    z-index: -1;
+}
+
+.solid {
+    z-index: -1;
+}
+
+.solidStart {
+    z-index: -1;
+}
+
+.player {
+    z-index: -1;
+    background-color: red;
+    height: 10px;
+}
+.textbox {
+    height: 200px;
+}
+
+#scroller * {
+    overflow-anchor: none;
+}
+
+  #anchor {
+    overflow-anchor: auto;
+    height: 1px;
+}
