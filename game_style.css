@@ -2,33 +2,88 @@
     box-sizing: border-box;
 }
 
+#visuals {
+    color: aliceblue;
+    height: 645px;
+    width: 650px;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    right: 150px;
+    padding: 5px;
+    margin: 10px;
+    border: 8px solid rgb(248, 247, 245); 
+    display:none;
+}
+.img1, .img2 {
+    height: 430 px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    z-index: -1;
+}
+
+#quest {
+    display: none;
+    background-color: rgb(12, 10, 10);
+    border: 2px solid rgb(248, 247, 245);
+    z-index: 1000;
+    color: aliceblue;
+    position: absolute;
+    height: 350px;
+    padding: 10px;
+}
+
+#questImg {
+    width:200px;
+    margin: 10px;
+}
+
 .textbox {
     margin:4px, 4px;
     padding:4px;
     width: 250px;
-    height: 100px;
+    height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
+    background-color: rgb(12, 10, 10);
+    border: 2px solid rgb(248, 247, 245);
 }
 
-body {background: #333;}
+body {background: rgb(17, 15, 15);}
+
+
 .log-boolean,
 .log-undefined {color: magenta;}
 .log-object,
 .log-string {color: orange;}
 .log-number {color: cyan;}
 
-.container{
-    opacity: 0;
-    animation: fade 5s linear;
+.controls {
+    width: 250px;
 }
 
+#container{
+    opacity: 0;
+    animation: fade 7s linear;
+}
 
 @keyframes fade {
   0%,100% { opacity: 0 }
   50% { opacity: 1 }
 
+}
+
+.UI {
+    width: 450px;
+    height: 200px;
+}
+
+#map {
+    position: absolute;
+    bottom: 0px;
 }
 
 .path {
@@ -39,7 +94,7 @@ body {background: #333;}
     z-index: -1;
 }
 
-.solidStart {
+.start {
     z-index: -1;
 }
 
@@ -48,15 +103,13 @@ body {background: #333;}
     background-color: red;
     height: 10px;
 }
-.textbox {
-    height: 200px;
-}
+
 
 #scroller * {
     overflow-anchor: none;
 }
 
-  #anchor {
+#anchor {
     overflow-anchor: auto;
     height: 1px;
 }

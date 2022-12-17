@@ -1,37 +1,57 @@
 window.onload = () =>   {
 
-    (function (logger) {
-        console.old = console.log;
-        console.log = function () {
-            var output = "", arg, i;
-    
-            for (i = 0; i < arguments.length; i++) {
-                arg = arguments[i];
-                output += "<span class=\"log-" + (typeof arg) + "\">";
-    
-                if (
-                    typeof arg === "object" &&
-                    typeof JSON === "object" &&
-                    typeof JSON.stringify === "function"
-                ) {
-                    output += JSON.stringify(arg);   
-                } else {
-                    output += arg;   
+    function starter() {
+
+        (function (logger) {
+            console.old = console.log;
+            console.log = function () {
+                var output = "", arg, i;
+        
+                for (i = 0; i < arguments.length; i++) {
+                    arg = arguments[i];
+                    output += "<span class=\"log-" + (typeof arg) + "\">";
+        
+                    if (
+                        typeof arg === "object" &&
+                        typeof JSON === "object" &&
+                        typeof JSON.stringify === "function"
+                    ) {
+                        output += JSON.stringify(arg);   
+                    } else {
+                        output += arg;   
+                    }
+        
+                    output += "</span>&nbsp;";
                 }
+        
+                logger.innerHTML += output + "<br>";
+                console.old.apply(undefined, arguments);
+            };
+        })(document.getElementById("logger"));
     
-                output += "</span>&nbsp;";
-            }
-    
-            logger.innerHTML += output + "<br>";
-            console.old.apply(undefined, arguments);
-        };
-    })(document.getElementById("logger"));
+        console.log("Oh no! You fell asleep in")
+        console.log("the school, and now you're")
+        console.log("trapped inside! With no lights!")
+        console.log("get out.")
+        console.log(" ")
+        console.log("For the full experience,") 
+        console.log("toggle visuals! (click twice, ") 
+        console.log("after start)")
+        console.log(" ")
+        console.log("Move with buttons")
+        console.log("or arrow keys!")
+        console.log("Valmistajad:")
+        console.log("Merili ja Anneli, 12a")
+        console.log(" ")
+        console.log(" ")
+
+        setTimeout(gameStart, 8000);
 
 
+    }
 
         function gameStart() {
 
-            document.getElementById("startGame").removeEventListener("click", gameStart)
     // Maze elements
         let s = document.createElement("div")
         s.style.width = "10px";
@@ -62,10 +82,16 @@ window.onload = () =>   {
         u.style.height = "10px";
         u.style.backgroundColor = 'rgb(0, 200, 0)';
         u.classname = "spooki";
-    
+
+        let r = document.createElement("div");
+        r.className = "pre-spook";
+        r.style.width = "10px";
+        r.style.height = "10px";
+        r.style.backgroundColor = 'rgb(0, 200, 0)';
+
 
         let container = document.createElement("div");
-        container.className = "container"
+        container.id = "container"
         container.style.width = "180px";
         container.style.height = "180px";
         document.body.appendChild(container);   
@@ -77,11 +103,11 @@ window.onload = () =>   {
             [w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w],
             [w,p,p,p,p,p,p,w,p,p,f,w,p,p,p,p,p,w],
             [w,p,w,p,w,w,w,w,p,w,w,w,p,w,w,w,p,w],
-            [w,p,w,p,p,p,p,w,u,w,p,p,p,p,p,w,p,w],
+            [w,p,w,p,p,p,p,w,p,w,p,p,p,p,p,w,p,w],
             [w,p,w,w,w,p,p,w,p,w,w,w,w,w,w,w,p,w],
             [w,p,p,p,w,w,p,w,p,w,p,p,p,p,p,p,p,w],
-            [w,w,w,w,w,p,p,w,p,w,p,w,w,w,w,w,p,w],
-            [w,p,p,p,p,p,w,w,p,w,p,w,p,p,p,p,p,w],
+            [w,w,w,w,w,p,p,w,u,w,p,w,w,w,w,w,p,w],
+            [w,p,p,p,p,p,w,w,r,w,p,w,p,p,p,p,p,w],
             [w,p,w,w,w,w,w,w,p,p,p,w,p,w,w,w,w,w],
             [w,p,p,p,p,p,p,w,w,w,w,w,p,w,p,p,s,w],
             [w,p,w,w,w,w,p,p,p,p,p,p,p,w,w,p,w,w],
@@ -116,7 +142,7 @@ window.onload = () =>   {
 
               
                 for (var i = 0; i < row.length; i++) {
-                    //console.log('I AM HERE YO', row[i]);
+                    //console.log('I AM HERE', row[i]);
                     myRowElement.appendChild(row[i].cloneNode()); 
 
                    //    console.log(myRowElement);
@@ -124,122 +150,316 @@ window.onload = () =>   {
                    // console.log("I AM WORKING")
                 }
                 
-                
+
+
 
 
                 var x = 15
                 var y = 9
 
-                //  console.log(document.body)
-
-               let player = document.createElement("div")
-                player.className = "player"
+               let player = document.createElement("div");
+                player.className = "player";
                 player.style.width = "10px";
                 player.style.height = "10px"
-                
+
                 map[y].splice(x,1,player)            
-                //console.log(map[y][x])        
+               
                 
                 
-                
-                function startSpooki() { 
-                    let modal = document.createElement("div")
-                    modal.className = "modal"
-                    modal.style.width
+   
 
-                    //kui vajutab välja või vasta valesti
-                    //container.remove()
-                }
 
-    
-                function keyPressRight() {
+                function keyPressRight() {                 
                     x++
 
-                   // console.log(y)
-                   // console.log(x)
-                   // console.log(map[y][x].className)
-
                     if (map[y][x].className === w.className) {
-                        console.log("can't move")
-                        x--
-                        //console.log(x)
-                        return
-                    } else if (map[y][x].className === u.className) {
+                        setTimeout(function keyPressright(){
+                            console.log("can't move that way")
+                        }, 600);
+                        var img1 = document.createElement("img");
+                        img1.src = "wall_smaller.gif";
+                        img1.style.width = "630px"
                         
-                        //console.log("spooki")
-                        startSpooki.apply()
-                    
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img1);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img1.style.display = "none";
+                        }
+                        x--
+                        return
+
+                    } else if (map[y][x].className === f.className) {    
+
+                        console.log("u won")
+
+                    var imgW = document.createElement("img");
+                        imgW.src = "escape.gif";
+                        imgW.style.width = "630px"
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(imgW);
+
+                        setTimeout(newPage, 2500);    
+
+                        function newPage () {
+                            location.replace (url = "https://tenor.com/search/congratulations-gifs")
+                        }
+
+
                     } else {
-                        console.log("moved right")
+                        setTimeout(function keyPressright(){
+                            console.log("moved right")
+                        }, 600);
+                        var img2 = document.createElement("img");
+                        img2.src = "step.gif";
+                        img2.style.width = "630px"
+                    
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img2);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img2.style.display = "none";
+                        }
                         return map[y].splice(x-1,1,p) && map[y].splice(x,1,player)
-                    } 
-                }
+                    
+                    }
+                };
+
+
+
+
 
 
                 function keyPressLeft() {
-                    //console.log(x)
                     x--
 
-                   // console.log(y)
-                   // console.log(x)
-                   // console.log(map[y][x].className)
-
                     if (map[y][x].className === w.className) {
-                        console.log("can't move")
+                       setTimeout(function keyPressright(){
+                            console.log("can't move that way")
+                        }, 600);
+                        var img1 = document.createElement("img");
+                        img1.src = "wall_smaller.gif";
+                        img1.style.width = "630px"
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img1);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img1.style.display = "none";
+                        }
                         x++
-                     //   console.log(x)
                         return
+
                     } else {
-                        console.log("moved left")
+                        setTimeout(function keyPressLeft(){
+                            console.log("moved left")
+                        }, 600);
+                        var img2 = document.createElement("img");
+                        img2.src = "step.gif";
+                        img2.style.width = "630px"
+                    
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img2);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img2.style.display = "none";
+                        }
+                         
                         return map[y].splice(x+1,1,p) && map[y].splice(x,1,player)
-                    } 
+                    }
                 }
+
+
+
 
 
                 function keyPressUp() {
-                   // console.log(y)
-
                     y--
 
-                    //console.log(y)
-                    //console.log(x)
-                    //console.log(map[y][x].className)
-
                     if (map[y][x].className === w.className) {
-                        console.log("can't move")
+                        setTimeout(function keyPressright(){
+                            console.log("can't move that way")
+                        }, 600);
+                        var img1 = document.createElement("img");
+                        img1.src = "wall_smaller.gif";
+                        img1.style.width = "630px"
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img1);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img1.style.display = "none";
+                        }
                         y++
-                    //    console.log(y)
                         return
+
+                    } else if (map[y][x].className === r.className) {     
+                            //console.log("pre-spooki")
+                        setTimeout(function keyPressUp(){
+                            console.log("...")
+                        }, 1500);
+                        var img3 = document.createElement("img");
+                        img3.src = "nearby.gif";
+                        img3.style.width = "630px"
+                    
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img3);
+
+                        setTimeout(hide, 1500);
+
+                        function hide() {
+                            img3.style.display = "none";
+                        }
+
+                        var img4 = document.createElement("img");
+                        img4.id = "wait"
+                        img4.src = "frame-18.png";
+                        img4.style.width = "630px"
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img4);
+                        
+
+                    } else if (map[y][x].className === u.className) {
+                            //console.log("spooki")                        
+                        let quest = document.getElementById("quest")
+                        console.log(quest)
+                        quest.style.display = "block"
+
+                        document.getElementById("wrong1").addEventListener("click", spookt);
+                        document.getElementById("wrong2").addEventListener("click", spookt);
+                        document.getElementById("correct").addEventListener("click", proceed);
+    
+                        function spookt () {
+                            quest.remove();
+                            console.log("git gut")
+
+                            var wait = document.getElementById("wait")
+                            wait.style.display = "none";
+                            
+                            var imgSMH = document.createElement("img");
+                            imgSMH.src = "smh.png";
+                            imgSMH.style.width = "630px"
+                            var src = document.getElementById("visuals");
+                            src.appendChild(imgSMH);
+
+                           setTimeout(study, 1000)
+                            function study() {
+                                location.replace(url="https://tpl.edu.ee/oppetoo/ulekoolilised-testid/")
+                            }
+                        }                                
+    
+                        function proceed () {
+                            //console.log("unspooked")
+
+                            var img4 = document.getElementById("wait")
+                            img4.style.display = "none"
+                            
+                            console.log('"Tubli! Oled"')
+                            console.log ('"kulturiseeritud inimene!" ')
+                            quest.remove();
+
+                            var imgBYE = document.createElement("img");
+                            imgBYE.src = "goodbye.gif";
+                            imgBYE.style.width = "630px"
+                        
+                            
+                            var src = document.getElementById("visuals");
+                            src.appendChild(imgBYE);
+    
+                            setTimeout(hide, 1600);
+    
+                            function hide() {
+                                imgBYE.style.display = "none";
+                            }
+                            
+                        }
+                    
                     } else {
-                        console.log("moved up")
+                        setTimeout(function keyPressUp(){
+                            console.log("moved up")
+                        }, 600);
+                        var img2 = document.createElement("img");
+                        img2.src = "step.gif";
+                        img2.style.width = "630px"
+                    
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img2);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img2.style.display = "none";
+                        }
+
                         return map[y+1].splice(x,1,p) && map[y].splice(x,1,player)
 
                     } 
-                }
+                };
+
+
+
 
 
                 function keyPressDown() {
-                    //console.log(y); 
                     y++
 
-                      //  console.log(y)
-                     //   console.log(x)
-                    //console.log(map[y][x].className)
-
                     if (map[y][x].className === w.className) {
-                        console.log("can't move");
+                        setTimeout(function keyPressright(){
+                            console.log("can't move that way")
+                        }, 600);
+                        var img1 = document.createElement("img");
+                        img1.src = "wall_smaller.gif";
+                        img1.style.width = "630px"
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img1);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img1.style.display = "none";
+                        }
                         y--
-                      //  console.log(y);
                         return
+
                     } else {
-                        console.log("moved down");
+                        setTimeout(function keyPressDown(){
+                            console.log("moved down");
+                        }, 600);
+                        var img2 = document.createElement("img");
+                        img2.src = "step.gif";
+                        img2.style.width = "630px"
+                    
+                        
+                        var src = document.getElementById("visuals");
+                        src.appendChild(img2);
+
+                        setTimeout(hide, 600);
+
+                        function hide() {
+                            img2.style.display = "none";
+                        }
                         return map[y-1].splice(x,1,p) && map[y].splice(x,1,player)
-                    };
+                    }
                 };
- 
             };  
             
-            document.addEventListener('keydown', (e) => {
+            document.addEventListener('keyup', (e) => {
                 e = e || window.event;
 
                 if (e.key === 'ArrowUp') {
@@ -264,30 +484,62 @@ window.onload = () =>   {
                     keyPressRight.apply()} 
                  //   console.log("right was pressed")
                 }
-            })  
+            });  
 
             document.getElementById("left").addEventListener("click", keyPressLeft);
             document.getElementById("right").addEventListener("click", keyPressRight);
             document.getElementById("up").addEventListener("click", keyPressUp);
             document.getElementById("down").addEventListener("click", keyPressDown);
               
-        }   
+        };     
+
+    };
+
+    function toggle() {
+        var x = document.getElementById("visuals");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        };
+      };
+
+    var v = 0 
+    function ligther() {
+        v++
+
+        if(v < 4) {
+            console.log (v + " out of three matches gone")
+
+            let mapper = document.getElementById("map")
+            mapper.style.display ="block"
+
+            setTimeout(hidecon, 6000);
+
+            function hidecon() {
+                mapper.style.display = "none";
+            }
+
+        } else {
+            return
+        }
     }
 
-    document.getElementById("startGame").addEventListener("click", gameStart); 
+
+    document.getElementById("match").addEventListener("click", ligther); 
+    document.getElementById("vibrations").addEventListener("click", toggle); 
 
 
+    var button = document.getElementById("startBtn");
+
+    button.onclick = function() {
+        starter.apply()
+        this.parentNode.removeChild(button);
+    }
 
 }
 
-        
-
     
-
-
-
-    
-    //document.getElementById("Start").addEventListener("click", gameStart); 
     
 
 

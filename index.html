@@ -14,27 +14,59 @@
 
         <script src="game_code.js"></script>
 
-
     </head>
 
     <body>
-        <div class="textbox">
-            <div id="scroller">
-                <pre id="logger"></pre>  
-                <div id="anchor"></div>
+        <div class="UI">
+            <div class="textbox">
+                <div id="scroller">
+                    <pre id="logger"></pre>  
+                    <div id="anchor"></div>
+                </div>
             </div>
+            <div id="map" style="display: none;"><img src="map.PNG"></div>
+
         </div>
+
+        <div id="visuals">
+        </div>
+
    
         
-        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <div id="quest">      
+        <div class="modal fade" id="questModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img id="questImg" src="scaryPedak.png">
+                        <p class="modal-title" id="ModalLabel">Tervist! Mitu uut reprot meil 
+                        selle õppeaasaga siis tulnud ka on?</p>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" id="wrong1">7</button>
+                        <button type="button" id="wrong2">9</button>
+                        <button type="button" id="correct">6</button>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div>
-            <button id="startGame"> Start </button>
+        <div class="controls">
+            <button id="startBtn"> Start </button>
             <button id="up"> Up </button>
             <button id ="down">Down</button>
             <button id ="left"> Left </button>
             <button id = "right">Right</button>
+            <button id ="vibrations">Toggle visuals</button>
+            <button id="match">Light a match</button>
         </div> 
 
 
